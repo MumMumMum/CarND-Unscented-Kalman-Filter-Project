@@ -28,6 +28,8 @@ public:
 
     ///* state covariance matrix
     MatrixXd P_;
+    MatrixXd R_lidar_;
+    MatrixXd R_radar_;
 
     ///* predicted sigma points matrix
     MatrixXd Xsig_pred_;
@@ -66,6 +68,8 @@ public:
 
     ///* Augmented state dimension
     int n_aug_;
+    ////toal sigma point = 2*n_aug+1
+    int n_aug_sigma;
 
     ///* Sigma point spreading parameter
     double lambda_;
@@ -77,6 +81,8 @@ public:
     double NIS_laser_;
 
     long long previous_timestamp_;
+
+    Tools tools_;
 
 
     /**
@@ -106,7 +112,7 @@ public:
      * matrix
      * @param delta_t Time between k and k+1 in s
      */
-    void Prediction(double delta_t,int sensorType);
+    void Prediction(double delta_t);
 
     /**
      * Updates the state and the state covariance matrix using a laser measurement
